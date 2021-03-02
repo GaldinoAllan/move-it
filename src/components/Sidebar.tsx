@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { FiAward, FiHome } from 'react-icons/fi';
+import { FiAward, FiHome, FiLogOut } from 'react-icons/fi';
 
 import styles from '../styles/components/Sidebar.module.css'
 
@@ -13,10 +13,19 @@ export function Sidebar() {
       </div>
       <div className={styles.navContainer}>
         <Link href='/home'>
-          <FiHome size={32} />
+          <a>
+            <FiHome size={32} />
+          </a>
         </Link>
         <Link href='/leaderboard'>
-          <FiAward size={32} />
+          <a>
+            <FiAward size={32} />
+          </a>
+        </Link>
+      </div>
+      <div className={styles.logoutContainer}>
+        <Link href='/'>
+          <FiLogOut size={32} />
         </Link>
       </div>
     </div >
