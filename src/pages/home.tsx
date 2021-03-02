@@ -10,7 +10,8 @@ import { ChallengeBox } from '../components/ChallengeBox';
 import { CountdownProvider } from '../contexts/CountdownContext';
 import { ChallengesProvider } from '../contexts/ChallengesContext';
 
-import styles from '../styles/pages/Home.module.css'
+import homeStyles from '../styles/pages/Home.module.css'
+import { useAuth } from '../contexts/AuthContext';
 
 interface HomeProps {
   level: number;
@@ -23,13 +24,16 @@ export default function Home({
   currentExperience,
   challengesCompleted
 }: HomeProps) {
+  const { currentUser } = useAuth()
+
   return (
+
     <ChallengesProvider
       level={level}
       currentExperience={currentExperience}
       challengesCompleted={challengesCompleted}
     >
-      <div className={styles.container}>
+      <div className={homeStyles.container}>
 
         <Head>
           <title>Home | move.it</title>

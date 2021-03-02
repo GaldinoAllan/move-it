@@ -1,20 +1,25 @@
 import Link from 'next/link'
 import { FiAward, FiHome, FiLogOut } from 'react-icons/fi';
+import { useAuth } from '../contexts/AuthContext';
 
 import { auth } from '../firebase/firebaseConfig';
 
 import styles from '../styles/components/Sidebar.module.css'
 
 export function Sidebar() {
+  const { currentUser } = useAuth()
+
+  const display = currentUser ? '' : 'none'
+
   return (
-    <div className={styles.sidebarContainer}>
+    <div className={styles.sidebarContainer} style={{ display: display }}>
       <div className={styles.logoContainer}>
         <Link href='/'>
           <img src="moveit-logo.svg" alt="logo move it" />
         </Link>
       </div>
       <div className={styles.navContainer}>
-        <Link href='/home'>
+        <Link href='/'>
           <a>
             <FiHome size={32} />
           </a>

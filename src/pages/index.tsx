@@ -1,17 +1,48 @@
-import Head from 'next/head';
+import { GetServerSideProps } from 'next'
 
-import styles from '../styles/pages/Landing.module.css'
+import { useAuth } from '../contexts/AuthContext';
 
-import { signInWithGoogle } from '../firebase/firebaseConfig'
+import Home from './home'
+import { Landing } from './Landing';
 
-export default function Landing() {
+
+
+interface HomeProps {
+  level: number;
+  currentExperience: number;
+  challengesCompleted: number;
+}
+
+export default function App({
+  level,
+  currentExperience,
+  challengesCompleted
+}: HomeProps) {
+  const { currentUser } = useAuth()
+
   return (
-    <div className={styles.landingContainer}>
-      <Head>
-        <title>Login | move.it</title>
-      </Head>
-      <h1>Landing</h1>
-      <button onClick={signInWithGoogle}>Sign In With Google</button>
-    </div>
+    <>
+      {
+        !currentUser
+          ? <Landing />
+          : <Home
+            level={level}
+            currentExperience={currentExperience}
+            challengesCompleted={challengesCompleted}
+          />
+      }
+    </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { level, currentExperience, challengesCompleted } = ctx.req.cookies
+
+  return {
+    props: {
+      level: Number(level),
+      currentExperience: Number(currentExperience),
+      challengesCompleted: Number(challengesCompleted),
+    }
+  }
 }
