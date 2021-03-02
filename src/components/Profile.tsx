@@ -9,7 +9,7 @@ export function Profile() {
 
   return (
     <div className={styles.profileContainer}>
-      <img src={currentUser.photoURL} alt="Allan Galdino" />
+      <img src={currentUser.photoURL} alt={currentUser.displayName} />
       <div>
         <strong>{currentUser.displayName}</strong>
         <p>

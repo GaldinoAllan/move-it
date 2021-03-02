@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { FiAward, FiHome, FiLogOut } from 'react-icons/fi';
 
+import { auth } from '../firebase/firebaseConfig';
+
 import styles from '../styles/components/Sidebar.module.css'
 
 export function Sidebar() {
@@ -24,8 +26,8 @@ export function Sidebar() {
         </Link>
       </div>
       <div className={styles.logoutContainer}>
-        <Link href='/'>
-          <FiLogOut size={32} />
+        <Link href='/' >
+          <FiLogOut size={32} onClick={() => auth.signOut()} />
         </Link>
       </div>
     </div >

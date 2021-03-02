@@ -12,6 +12,7 @@
 }
 
 .logoContainer{
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,6 +43,7 @@
 }
 
 .logoutContainer{
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;

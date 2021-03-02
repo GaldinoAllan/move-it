@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { useRouter } from 'next/router'
 import { auth } from "../firebase/firebaseConfig";
 
 interface CurrentUserData {
@@ -14,6 +15,7 @@ interface AuthContextData {
 export const AuthContext = createContext({} as AuthContextData)
 
 export function AuthProvider({ children }) {
+  const { pathname, events } = useRouter()
   const [currentUser, setCurrentUser] = useState({} as CurrentUserData)
 
   useEffect(() => {
@@ -24,7 +26,26 @@ export function AuthProvider({ children }) {
     return () => {
       unsubscribeFromAuth()
     }
-  }, [])
+  }, [pathname])
+
+  useEffect(() => {
+    // Check that a new route is OK
+    const handleRouteChange = (url: String) => {
+      if (url !== '/' && !currentUser) {
+        window.location.href = '/'
+      }
+    }
+    // Check that initial route is OK
+    if (pathname !== '/' && currentUser === null) {
+      window.location.href = '/'
+    }
+
+    // Monitor routes
+    events.on('routeChangeStart', handleRouteChange)
+    return () => {
+      events.off('routeChangeStart', handleRouteChange)
+    }
+  }, [currentUser])
 
   const value = {
     currentUser
