@@ -7,10 +7,12 @@ export function Sidebar() {
   return (
     <div className={styles.sidebarContainer}>
       <div className={styles.logoContainer}>
-        <img src="moveit-logo.svg" alt="logo move it" />
+        <Link href='/'>
+          <img src="moveit-logo.svg" alt="logo move it" />
+        </Link>
       </div>
       <div className={styles.navContainer}>
-        <Link href='/'>
+        <Link href='/home'>
           <FiHome size={32} />
         </Link>
         <Link href='/leaderboard'>
