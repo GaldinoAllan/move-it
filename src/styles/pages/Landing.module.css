@@ -2,7 +2,70 @@
   height: 100vh;
   width: 100vh;
   flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  background: var(--blue);
+
+  color: var(--white)
+}
+
+.landingLeftContainer{
+  align-self: center;
+}
+
+.landingRightContainer{
+  align-self: center;
+  justify-self: center;
+  height: 100vh;
+  
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.landingRightContainer > img {
+  margin: 0 0 3rem;
+}
+
+.rightContent{
+  width: 100%;
+  margin: 3rem 0 0;
+}
+
+.rightContent > p{
+  margin: 2rem 0;
+  display: flex;
+  align-items: center;
+  color: var(--text-highlight);
+}
+
+.singInWithGoogleButton{
+  background: var(--blue-dark);
+  width: 100%;
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: 2px solid var(--green);
+  border-radius: 5px;
+  color: var(--text-highlight);
+
+  transition: background 0.2s
+}
+
+.singInWithGoogleButton img{
+  max-height: 4rem;
+}
+
+.singInWithGoogleButton p{
+  flex: 1;
+}
+
+
+.singInWithGoogleButton:hover{
+  background: var(--green);
+  color: var(--white)
 }

@@ -1,17 +1,32 @@
 import Head from 'next/head';
 
-import landingStyles from '../styles/pages/Landing.module.css'
+import styles from '../styles/pages/Landing.module.css'
 
 import { signInWithGoogle } from '../firebase/firebaseConfig'
 
 export function Landing() {
   return (
-    <div className={landingStyles.landingContainer}>
+    <div className={styles.landingContainer}>
       <Head>
         <title>Login | move.it</title>
       </Head>
-      <h1>Landing</h1>
-      <button onClick={signInWithGoogle}>Sign In With Google</button>
+      <div className={styles.landingLeftContainer}>
+        <img src="big-logo.png" alt="Move it logo" />
+      </div>
+      <div className={styles.landingRightContainer}>
+        <img src="logo-full-white.png" alt="" />
+        <div className={styles.rightContent}>
+          <h1>Bem-vindo</h1>
+          <p>Faça login com a sua conta da Dextra</p>
+          <button
+            className={styles.singInWithGoogleButton}
+            onClick={signInWithGoogle}
+          >
+            <img src="google.png" alt="google logo" />
+            <p>Sign In With Google</p>
+          </button>
+        </div>
+      </div>
     </div>
   )
 }

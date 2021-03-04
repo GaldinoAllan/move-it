@@ -15,7 +15,9 @@ export function Sidebar() {
     <div className={styles.sidebarContainer} style={{ display: display }}>
       <div className={styles.logoContainer}>
         <Link href='/'>
-          <img src="moveit-logo.svg" alt="logo move it" />
+          <a>
+            <img src="moveit-logo.svg" alt="logo move it" />
+          </a>
         </Link>
       </div>
       <div className={styles.navContainer}>
@@ -32,7 +34,9 @@ export function Sidebar() {
       </div>
       <div className={styles.logoutContainer}>
         <Link href='/' >
-          <FiLogOut size={32} onClick={() => auth.signOut()} />
+          <a>
+            <FiLogOut size={32} onClick={() => auth.signOut()} />
+          </a>
         </Link>
       </div>
     </div >
