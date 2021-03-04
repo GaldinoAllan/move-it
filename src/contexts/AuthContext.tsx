@@ -1,11 +1,16 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useRouter } from 'next/router'
-import { auth } from "../firebase/firebaseConfig";
+import { auth, createUserProfileDocument } from "../firebase/firebaseConfig";
 
 interface CurrentUserData {
+  uid: string;
   displayName: string;
   email: string;
   photoURL: string;
+  createdAt: Date;
+  level: number;
+  currentExperience: number;
+  challengesCompleted: number;
 }
 
 interface AuthContextData {
@@ -19,8 +24,27 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState({} as CurrentUserData)
 
   useEffect(() => {
-    const unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      setCurrentUser(user)
+    const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth)
+
+        userRef.onSnapshot(snapshot => {
+          const user = {
+            uid: snapshot.id,
+            displayName: snapshot.data().displayName,
+            email: snapshot.data().email,
+            photoURL: snapshot.data().photoURL,
+            createdAt: snapshot.data().createdAt,
+            level: snapshot.data().level,
+            currentExperience: snapshot.data().currentExperience,
+            challengesCompleted: snapshot.data().challengesCompleted,
+          }
+
+          setCurrentUser(user)
+        })
+      }
+
+      setCurrentUser(null)
     })
 
     return () => {
