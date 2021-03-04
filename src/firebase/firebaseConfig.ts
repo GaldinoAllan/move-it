@@ -2,6 +2,13 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 
+interface UserData {
+  uid: string;
+  displayName: string;
+  email: string;
+  photoURL: string;
+}
+
 const firebaseConfig = {
   apiKey: "AIzaSyB_McwizGpO7sROMRTGzyror7mtIEbZp1c",
   authDomain: "dextra-move-it.firebaseapp.com",
@@ -11,6 +18,36 @@ const firebaseConfig = {
   appId: "1:887953051682:web:d2279b448e03ce6789fa7b",
   measurementId: "G-PHB3FC91QB"
 };
+
+export const createUserProfileDocument = async (
+  userAuth: UserData,
+) => {
+  if (!userAuth) return;
+
+  const userRef = firestore.doc(`users/${userAuth.uid}`)
+  const snapshot = await userRef.get()
+
+  if (!snapshot.exists) {
+    const { displayName, email, photoURL } = userAuth
+    const createdAt = new Date()
+
+    try {
+      await userRef.set({
+        displayName,
+        email,
+        photoURL,
+        createdAt,
+        level: 1,
+        currentExperience: 0,
+        challengesCompleted: 0,
+      })
+    } catch (error) {
+      console.log('Error creating user', error.message);
+    }
+  }
+
+  return userRef
+}
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)

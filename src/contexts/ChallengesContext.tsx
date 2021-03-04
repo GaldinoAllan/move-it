@@ -4,6 +4,7 @@ import Cookies from 'js-cookie'
 import { LevelUpModal } from '../components/LevelUpModal'
 
 import challenges from '../../challenges.json'
+import { useAuth } from './AuthContext'
 
 interface Challenge {
   type: 'body' | 'eye';
@@ -26,17 +27,16 @@ interface ChallengesContextData {
 
 interface ChallengesProviderProps {
   children: ReactNode
-  level: number;
-  currentExperience: number;
-  challengesCompleted: number;
 }
 
 export const ChallengesContext = createContext({} as ChallengesContextData)
 
-export function ChallengesProvider({ children, ...rest }: ChallengesProviderProps) {
-  const [level, setLevel] = useState(rest.level ?? 1)
-  const [currentExperience, setCurrentExperience] = useState(rest.currentExperience ?? 0)
-  const [challengesCompleted, setChallengesCompleted] = useState(rest.challengesCompleted ?? 0)
+export function ChallengesProvider({ children }: ChallengesProviderProps) {
+  const { currentUser, updateUser } = useAuth()
+
+  const [level, setLevel] = useState(currentUser.level ?? 1)
+  const [currentExperience, setCurrentExperience] = useState(currentUser.currentExperience ?? 0)
+  const [challengesCompleted, setChallengesCompleted] = useState(currentUser.challengesCompleted ?? 0)
 
   const [activeChallenge, setActiveChallenge] = useState(null)
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false)
@@ -48,9 +48,9 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
   }, [])
 
   useEffect(() => {
-    Cookies.set('level', String(level))
-    Cookies.set('currentExperience', String(currentExperience))
-    Cookies.set('challengesCompleted', String(challengesCompleted))
+    if (currentUser.uid && currentExperience !== currentUser.currentExperience) {
+      updateUser(level, currentExperience, challengesCompleted)
+    }
   }, [level, currentExperience, challengesCompleted])
 
   function levelUp() {

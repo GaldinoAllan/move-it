@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { GetServerSideProps } from 'next'
 
 import { CompletedChallenges } from '../components/CompletedChallenges';
 import { Countdown } from '../components/Countdown';
@@ -11,60 +10,28 @@ import { CountdownProvider } from '../contexts/CountdownContext';
 import { ChallengesProvider } from '../contexts/ChallengesContext';
 
 import homeStyles from '../styles/pages/Home.module.css'
-import { useAuth } from '../contexts/AuthContext';
 
-interface HomeProps {
-  level: number;
-  currentExperience: number;
-  challengesCompleted: number;
-}
+export const Home = () => (
+  <ChallengesProvider>
+    <div className={homeStyles.container}>
 
-export default function Home({
-  level,
-  currentExperience,
-  challengesCompleted
-}: HomeProps) {
-  const { currentUser } = useAuth()
+      <Head>
+        <title>Home | move.it</title>
+      </Head>
 
-  return (
-
-    <ChallengesProvider
-      level={level}
-      currentExperience={currentExperience}
-      challengesCompleted={challengesCompleted}
-    >
-      <div className={homeStyles.container}>
-
-        <Head>
-          <title>Home | move.it</title>
-        </Head>
-
-        <ExperienceBar />
-        <CountdownProvider>
-          <section>
-            <div>
-              <Profile />
-              <CompletedChallenges />
-              <Countdown />
-            </div>
-            <div>
-              <ChallengeBox />
-            </div>
-          </section>
-        </CountdownProvider>
-      </div>
-    </ChallengesProvider>
-  )
-}
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { level, currentExperience, challengesCompleted } = ctx.req.cookies
-
-  return {
-    props: {
-      level: Number(level),
-      currentExperience: Number(currentExperience),
-      challengesCompleted: Number(challengesCompleted),
-    }
-  }
-}
+      <ExperienceBar />
+      <CountdownProvider>
+        <section>
+          <div>
+            <Profile />
+            <CompletedChallenges />
+            <Countdown />
+          </div>
+          <div>
+            <ChallengeBox />
+          </div>
+        </section>
+      </CountdownProvider>
+    </div>
+  </ChallengesProvider>
+)

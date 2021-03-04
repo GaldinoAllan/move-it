@@ -32,12 +32,8 @@ export function Sidebar() {
           </a>
         </Link>
       </div>
-      <div className={styles.logoutContainer}>
-        <Link href='/' >
-          <a>
-            <FiLogOut size={32} onClick={() => auth.signOut()} />
-          </a>
-        </Link>
+      <div className={styles.logoutContainer} onClick={() => auth.signOut()}>
+        <FiLogOut size={32} />
       </div>
     </div >
   )
