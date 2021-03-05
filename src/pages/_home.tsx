@@ -11,29 +11,29 @@ import { ChallengesProvider } from '../contexts/ChallengesContext';
 
 import styles from '../styles/pages/Home.module.css'
 
-const Home = () => (
-  <ChallengesProvider>
-    <div className={styles.container}>
+export function Home() {
+  return (
+    <ChallengesProvider>
+      <div className={styles.container}>
 
-      <Head>
-        <title>Home | move.it</title>
-      </Head>
+        <Head>
+          <title>Home | move.it</title>
+        </Head>
 
-      <ExperienceBar />
-      <CountdownProvider>
-        <section>
-          <div>
-            <Profile />
-            <CompletedChallenges />
-            <Countdown />
-          </div>
-          <div>
-            <ChallengeBox />
-          </div>
-        </section>
-      </CountdownProvider>
-    </div>
-  </ChallengesProvider>
-)
-
-export default Home
+        <ExperienceBar />
+        <CountdownProvider>
+          <section>
+            <div>
+              <Profile />
+              <CompletedChallenges />
+              <Countdown />
+            </div>
+            <div>
+              <ChallengeBox />
+            </div>
+          </section>
+        </CountdownProvider>
+      </div>
+    </ChallengesProvider>
+  )
+}

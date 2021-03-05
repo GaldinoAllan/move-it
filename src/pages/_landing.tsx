@@ -4,7 +4,7 @@ import { signInWithGoogle } from '../firebase/firebaseConfig'
 
 import styles from '../styles/pages/Landing.module.css'
 
-export default function Landing() {
+export function Landing() {
   return (
     <div className={styles.landingContainer}>
       <Head>
