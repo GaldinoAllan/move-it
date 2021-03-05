@@ -1,8 +1,8 @@
 import Head from 'next/head';
 
-import styles from '../styles/pages/Landing.module.css'
-
 import { signInWithGoogle } from '../firebase/firebaseConfig'
+
+import styles from '../styles/pages/Landing.module.css'
 
 export default function Landing() {
   return (
