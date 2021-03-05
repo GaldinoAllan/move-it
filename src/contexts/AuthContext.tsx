@@ -61,7 +61,7 @@ export function AuthProvider({ children }) {
   }, [])
 
   useEffect(() => {
-    // Check that a new route is OK
+    /// Check that a new route is OK
     const handleRouteChange = (url: String) => {
 
       if (url !== '/' && !currentUser) {
@@ -69,12 +69,12 @@ export function AuthProvider({ children }) {
       }
     }
 
-    // Check that initial route is OK
+    /// Check that initial route is OK
     if (pathname !== '/' && currentUser === null) {
       window.location.href = '/'
     }
 
-    // Monitor routes
+    /// Monitor routes
     events.on('routeChangeStart', handleRouteChange)
     return () => {
       events.off('routeChangeStart', handleRouteChange)

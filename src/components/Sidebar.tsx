@@ -26,11 +26,12 @@ export function Sidebar() {
             <FiHome size={32} />
           </a>
         </Link>
+        {/* TODO: implement leaderboard
         <Link href='/leaderboard'>
           <a>
             <FiAward size={32} />
           </a>
-        </Link>
+        </Link> */}
       </div>
       <div className={styles.logoutContainer} onClick={() => auth.signOut()}>
         <FiLogOut size={32} />

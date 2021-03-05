@@ -89,10 +89,8 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
     const { amount } = activeChallenge
 
     /* 
-      Colocado em variavel let pois se o total de experiencia que o usuario
-      tem somado com o tanto que ele vai receber de xp fizer com que ele 
-      avance o nivel, a xp precisa voltar para 0 e subir somento o restante 
-      que faltou 
+      if experience reach the total for the current level, it needs to be set
+      to 0 so it can keep going up until reach the max amount for the next level
     */
     let finalExperience = currentExperience + amount
 
