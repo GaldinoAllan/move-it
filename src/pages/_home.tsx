@@ -9,11 +9,11 @@ import { ChallengeBox } from '../components/ChallengeBox';
 import { CountdownProvider } from '../contexts/CountdownContext';
 import { ChallengesProvider } from '../contexts/ChallengesContext';
 
-import homeStyles from '../styles/pages/Home.module.css'
+import styles from '../styles/pages/Home.module.css'
 
 const Home = () => (
   <ChallengesProvider>
-    <div className={homeStyles.container}>
+    <div className={styles.container}>
 
       <Head>
         <title>Home | move.it</title>
