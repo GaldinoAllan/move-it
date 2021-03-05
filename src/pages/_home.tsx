@@ -11,7 +11,7 @@ import { ChallengesProvider } from '../contexts/ChallengesContext';
 
 import styles from '../styles/pages/Home.module.css'
 
-export function Home() {
+export default function Home() {
   return (
     <ChallengesProvider>
       <div className={styles.container}>
