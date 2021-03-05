@@ -11,7 +11,7 @@ import { ChallengesProvider } from '../contexts/ChallengesContext';
 
 import homeStyles from '../styles/pages/Home.module.css'
 
-export const Home = () => (
+const Home = () => (
   <ChallengesProvider>
     <div className={homeStyles.container}>
 
@@ -35,3 +35,5 @@ export const Home = () => (
     </div>
   </ChallengesProvider>
 )
+
+export default Home

@@ -1,7 +1,7 @@
 import { useAuth } from '../contexts/AuthContext';
 
-import { Home } from './home'
-import { Landing } from './landing';
+import Home from './home'
+import Landing from './landing';
 
 export default function App() {
   const { currentUser, loading } = useAuth()
