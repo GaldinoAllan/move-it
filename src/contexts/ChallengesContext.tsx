@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useEffect, useState } from 'react'
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 
 import { LevelUpModal } from '../components/LevelUpModal'
@@ -123,4 +123,10 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
       {isLevelUpModalOpen && <LevelUpModal />}
     </ChallengesContext.Provider>
   )
+}
+
+export function useChallengesProvider(): ChallengesContextData {
+  const context = useContext(ChallengesContext);
+
+  return context;
 }

@@ -1,16 +1,19 @@
 import Head from 'next/head'
-import styles from '../styles/pages/Leaderboard.module.css'
+import { Sidebar } from '../components/Sidebar'
+
+import { LeaderboardContainer } from '../styles/pages/Leaderboard'
 
 function Leaderboard() {
   return (
-    <div className={styles.leaderboardContainer}>
+    <LeaderboardContainer>
       <Head>
         <title>Leaderboard | move.it</title>
       </Head>
+      <Sidebar />
       <h1>
         Leaderboard
       </h1>
-    </div>
+    </LeaderboardContainer>
   )
 }
 
