@@ -22,10 +22,8 @@ export const LandingContainer = styled.div`
     gap: 6.25rem;
     align-content: center;
     position: relative;
-
     
-    
-    @media (max-width: 520px){
+    @media (max-width: 800px){
 
       grid-template-columns: 1fr;
       gap: 0;
