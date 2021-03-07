@@ -1,14 +1,15 @@
 import { useContext } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { ChallengesContext } from '../contexts/ChallengesContext'
-import styles from '../styles/components/Profile.module.css'
+
+import { ProfileContainer } from '../styles/components/Profile'
 
 export function Profile() {
   const { level } = useContext(ChallengesContext)
   const { currentUser } = useAuth()
 
   return (
-    <div className={styles.profileContainer}>
+    <ProfileContainer>
       <img src={currentUser.photoURL} alt={currentUser.displayName} />
       <div>
         <strong>{currentUser.displayName}</strong>
@@ -17,6 +18,6 @@ export function Profile() {
           Level {level}
         </p>
       </div>
-    </div>
+    </ProfileContainer>
   )
 }

@@ -5,35 +5,42 @@ import { Countdown } from '../components/Countdown';
 import { ExperienceBar } from '../components/ExperienceBar';
 import { Profile } from '../components/Profile';
 import { ChallengeBox } from '../components/ChallengeBox';
+import { Sidebar } from '../components/Sidebar';
 
 import { CountdownProvider } from '../contexts/CountdownContext';
 import { ChallengesProvider } from '../contexts/ChallengesContext';
 
-import styles from '../styles/pages/Home.module.css'
+import {
+  HomeContainer,
+  LeftSide,
+  RightSide,
+} from '../styles/pages/Home'
 
 export default function Home() {
   return (
     <ChallengesProvider>
-      <div className={styles.container}>
+      <HomeContainer>
 
         <Head>
           <title>Home | move.it</title>
         </Head>
 
+        <Sidebar />
+
         <ExperienceBar />
         <CountdownProvider>
           <section>
-            <div>
+            <LeftSide>
               <Profile />
               <CompletedChallenges />
               <Countdown />
-            </div>
-            <div>
+            </LeftSide>
+            <RightSide>
               <ChallengeBox />
-            </div>
+            </RightSide>
           </section>
         </CountdownProvider>
-      </div>
+      </HomeContainer>
     </ChallengesProvider>
   )
 }

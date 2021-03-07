@@ -1,6 +1,6 @@
 import { useAuth } from '../contexts/AuthContext';
 
-import Home from '../components/_home'
+import Home from './home'
 import Landing from '../components/_landing';
 
 export default function App() {
