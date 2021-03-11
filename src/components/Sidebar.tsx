@@ -27,16 +27,15 @@ export function Sidebar() {
       </svg>
       <nav>
         <Link href='/home'>
-          <a className={route.includes('home') ? "active" : undefined}>
+          <a className={route.includes('home') ? 'active' : undefined}>
             <FiHome size={32} />
           </a>
         </Link>
-        {/* TODO: implement leaderboard */}
-        {/* <Link href='/leaderboard'>
-          <a className={route.includes('leaderboard') && "active"}>
+        <Link href='/leaderboard'>
+          <a className={route.includes('leaderboard') ? 'active' : undefined}>
             <FiAward size={32} />
           </a>
-        </Link> */}
+        </Link>
         <button type="button" onClick={handleClick}>
           {theme.title === 'light' ? <FiMoon size={30} /> : <FiSun size={30} />}
         </button>
