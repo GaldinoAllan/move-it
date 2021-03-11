@@ -1,18 +1,18 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router';
 
-// import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
 
 import { FiSun, FiMoon, FiHome, FiAward, FiLogOut } from "react-icons/fi";
-
-import { auth } from '../firebase/firebaseConfig';
 
 import { Container } from '../styles/components/Sidebar'
 
 export function Sidebar() {
   const { route } = useRouter();
+
   const { ToggleTheme, theme } = useTheme();
+  const { signOut } = useAuth()
 
   function handleClick() {
     ToggleTheme()
@@ -41,10 +41,9 @@ export function Sidebar() {
           {theme.title === 'light' ? <FiMoon size={30} /> : <FiSun size={30} />}
         </button>
       </nav>
-      <div className='logoutContainer' onClick={() => auth.signOut()}>
+      <div className='logoutContainer' onClick={signOut}>
         <FiLogOut size={32} />
       </div>
     </Container>
-    // </div >
   )
 }

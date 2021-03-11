@@ -26,17 +26,24 @@ interface ChallengesContextData {
 }
 
 interface ChallengesProviderProps {
-  children: ReactNode
+  children: ReactNode;
+  uid: string;
+  displayName: string;
+  email: string;
+  photoURL: string;
+  level: number;
+  currentExperience: number;
+  challengesCompleted: number;
 }
 
 export const ChallengesContext = createContext({} as ChallengesContextData)
 
-export function ChallengesProvider({ children }: ChallengesProviderProps) {
-  const { currentUser, updateUser } = useAuth()
+export function ChallengesProvider({ children, ...rest }: ChallengesProviderProps) {
+  const { updateUser } = useAuth()
 
-  const [level, setLevel] = useState(currentUser.level ?? 1)
-  const [currentExperience, setCurrentExperience] = useState(currentUser.currentExperience ?? 0)
-  const [challengesCompleted, setChallengesCompleted] = useState(currentUser.challengesCompleted ?? 0)
+  const [level, setLevel] = useState(rest.level ?? 1)
+  const [currentExperience, setCurrentExperience] = useState(rest.currentExperience ?? 0)
+  const [challengesCompleted, setChallengesCompleted] = useState(rest.challengesCompleted ?? 0)
 
   const [activeChallenge, setActiveChallenge] = useState(null)
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false)
@@ -48,7 +55,7 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
   }, [])
 
   useEffect(() => {
-    if (currentUser.uid && currentExperience !== currentUser.currentExperience) {
+    if (rest.uid && currentExperience !== rest.currentExperience) {
       updateUser(level, currentExperience, challengesCompleted)
     }
   }, [level, currentExperience, challengesCompleted])

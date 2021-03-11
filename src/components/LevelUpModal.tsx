@@ -1,5 +1,3 @@
-import { useContext } from "react"
-
 import { motion } from "framer-motion"
 
 import { useChallengesProvider } from '../contexts/ChallengesContext'
