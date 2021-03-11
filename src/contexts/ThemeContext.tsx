@@ -19,21 +19,21 @@ interface ThemeContextData {
 
 const ThemeContext = createContext({} as ThemeContextData);
 
-export const ThemesProvider: React.FC = ({ children }) => {
+export function ThemesProvider({ children }) {
   const [theme, setTheme] = useState<DefaultTheme>(light);
 
   useEffect(() => {
-    const themeLocal = localStorage.getItem('@MoveYourself:theme');
+    const themeLocal = localStorage.getItem('@MoveIt:theme');
 
     setTheme(themeLocal === 'light' ? light : dark);
   }, []);
 
   const ToggleTheme = () => {
     if (theme.title === 'light') {
-      localStorage.setItem('@MoveYourself:theme', dark.title);
+      localStorage.setItem('@MoveIt:theme', dark.title);
       setTheme(dark);
     } else {
-      localStorage.setItem('@MoveYourself:theme', light.title);
+      localStorage.setItem('@MoveIt:theme', light.title);
       setTheme(light);
     }
   };
