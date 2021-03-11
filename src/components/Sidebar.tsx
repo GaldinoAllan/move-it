@@ -27,7 +27,7 @@ export function Sidebar() {
       </svg>
       <nav>
         <Link href='/home'>
-          <a className={route.includes('home') && "active"}>
+          <a className={route.includes('home') ? "active" : undefined}>
             <FiHome size={32} />
           </a>
         </Link>
