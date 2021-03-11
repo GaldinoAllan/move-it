@@ -56,11 +56,10 @@ export function AuthProvider({ children }) {
           }
 
           setCurrentUser(user)
-          Cookies.set("user", JSON.stringify(user))
-          route.push(`/home`);
+          Cookies.set('user', JSON.stringify(user))
+          route.pathname === '/' && route.push('/home')
         })
       }
-
       setCurrentUser(null)
     })
 
@@ -69,12 +68,13 @@ export function AuthProvider({ children }) {
     }
   }, [])
 
-  function signIn() {
-    signInWithGoogle()
+  async function signIn() {
+    await signInWithGoogle()
   }
 
   function signOut() {
     auth.signOut()
+    Cookies.set('user', '')
     route.push('/');
   }
 
