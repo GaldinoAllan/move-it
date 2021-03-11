@@ -1,4 +1,8 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+
+import Cookies from 'js-cookie';
 
 import { FiMoon, FiSun } from "react-icons/fi";
 
@@ -14,10 +18,16 @@ import {
 } from '../styles/pages/Landing'
 
 
-
 export default function App() {
   const { theme, ToggleTheme } = useTheme();
   const { signIn } = useAuth()
+  const route = useRouter();
+
+  const hasUser = !!Cookies.get('user')
+
+  useEffect(() => {
+    hasUser && route.push('/home')
+  }, [])
 
   function handleToggleTheme() {
     ToggleTheme()
