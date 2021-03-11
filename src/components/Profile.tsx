@@ -1,22 +1,22 @@
-import { useContext } from 'react'
-import { useAuth } from '../contexts/AuthContext'
-import { ChallengesContext } from '../contexts/ChallengesContext'
-import styles from '../styles/components/Profile.module.css'
+import { ProfileContainer } from '../styles/components/Profile'
 
-export function Profile() {
-  const { level } = useContext(ChallengesContext)
-  const { currentUser } = useAuth()
+interface IProfileProps {
+  displayName: string
+  level: number
+  photoURL: string
+}
 
+export function Profile({ displayName, level, photoURL }: IProfileProps) {
   return (
-    <div className={styles.profileContainer}>
-      <img src={currentUser.photoURL} alt={currentUser.displayName} />
+    <ProfileContainer>
+      <img src={photoURL} alt={displayName} />
       <div>
-        <strong>{currentUser.displayName}</strong>
+        <strong>{displayName}</strong>
         <p>
           <img src="icons/level.svg" alt="green arrow up" />
           Level {level}
         </p>
       </div>
-    </div>
+    </ProfileContainer>
   )
 }

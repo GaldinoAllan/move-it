@@ -1,6 +1,14 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useRouter } from 'next/router'
-import { auth, createUserProfileDocument, firestore } from "../firebase/firebaseConfig";
+
+import Cookies from 'js-cookie';
+import {
+  auth,
+  createUserProfileDocument,
+  firestore,
+  signInWithGoogle
+} from "../firebase/firebaseConfig";
+
 
 interface CurrentUserData {
   uid: string;
@@ -15,7 +23,8 @@ interface CurrentUserData {
 
 interface AuthContextData {
   currentUser: CurrentUserData;
-  loading: boolean;
+  signIn: () => void;
+  signOut: () => void;
   updateUser: (
     level: number,
     currentExperience: number,
@@ -26,9 +35,8 @@ interface AuthContextData {
 export const AuthContext = createContext({} as AuthContextData)
 
 export function AuthProvider({ children }) {
-  const { pathname, events } = useRouter()
-  const [currentUser, setCurrentUser] = useState<CurrentUserData>()
-  const [loading, setLoading] = useState(true)
+  const route = useRouter();
+  const [currentUser, setCurrentUser] = useState<CurrentUserData>(null)
 
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -48,10 +56,10 @@ export function AuthProvider({ children }) {
           }
 
           setCurrentUser(user)
-          setLoading(false)
+          Cookies.set('user', JSON.stringify(user))
+          route.pathname === '/' && route.push('/home')
         })
       }
-
       setCurrentUser(null)
     })
 
@@ -60,26 +68,15 @@ export function AuthProvider({ children }) {
     }
   }, [])
 
-  useEffect(() => {
-    /// Check that a new route is OK
-    const handleRouteChange = (url: String) => {
+  async function signIn() {
+    await signInWithGoogle()
+  }
 
-      if (url !== '/' && !currentUser) {
-        window.location.href = '/'
-      }
-    }
-
-    /// Check that initial route is OK
-    if (pathname !== '/' && currentUser === null) {
-      window.location.href = '/'
-    }
-
-    /// Monitor routes
-    events.on('routeChangeStart', handleRouteChange)
-    return () => {
-      events.off('routeChangeStart', handleRouteChange)
-    }
-  }, [currentUser])
+  function signOut() {
+    auth.signOut()
+    Cookies.set('user', '')
+    route.push('/');
+  }
 
   function updateUser(
     level: number,
@@ -97,9 +94,10 @@ export function AuthProvider({ children }) {
   }
 
   const value = {
+    signIn,
+    signOut,
     currentUser,
     updateUser,
-    loading
   }
 
   return (

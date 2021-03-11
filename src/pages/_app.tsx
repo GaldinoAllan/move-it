@@ -1,19 +1,16 @@
-import { Sidebar } from '../components/Sidebar';
-
+import type { AppProps } from 'next/app'
 import { AuthProvider } from '../contexts/AuthContext';
+import { ThemesProvider } from '../contexts/ThemeContext';
 
-import styles from '../styles/pages/App.module.css'
-import '../styles/global.css'
+import { GlobalStyle } from '../styles/global';
 
-function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <AuthProvider>
-      <div className={styles.content}>
-        <Sidebar />
+    <ThemesProvider>
+      <AuthProvider>
+        <GlobalStyle />
         <Component {...pageProps} />
-      </div>
-    </AuthProvider>
+      </AuthProvider>
+    </ThemesProvider>
   )
 }
-
-export default MyApp
