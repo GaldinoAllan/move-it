@@ -1,12 +1,35 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Router from 'next/router'
+import { useEffect, useState } from 'react'
 
 import { Sidebar } from '../components/Sidebar'
+import { getUsers } from '../firebase/firebaseConfig'
 
 import { LeaderboardContainer } from '../styles/pages/Leaderboard'
 
-export default function Leaderboard(props) {
+interface IUsers {
+  uid: string;
+  displayName: string;
+  email: string;
+  photoURL: string;
+  createdAt: Date;
+  level: number;
+  currentExperience: number;
+  challengesCompleted: number;
+}
+
+export default function Leaderboard({ userFormatted }) {
+  const [users, setUsers] = useState<IUsers[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    getUsers().then((users) => {
+      setUsers(users as IUsers[])
+    })
+    setLoading(false)
+  }, [])
+
   return (
     <LeaderboardContainer>
       <Head>
@@ -16,6 +39,19 @@ export default function Leaderboard(props) {
       <h1>
         Leaderboard
       </h1>
+      {
+        loading
+          ? <h1>Loading...</h1>
+          : (
+            <>
+              {
+                users.map(user => (
+                  <h1>{user.displayName}</h1>
+                ))
+              }
+            </>
+          )
+      }
     </LeaderboardContainer>
   )
 }
@@ -33,13 +69,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
       props: {}
     }
-  } else {
-    const userFormatted = JSON.parse(user)
+  }
 
-    return {
-      props: {
-        ...userFormatted
-      }
+  const userFormatted = JSON.parse(user)
+
+  return {
+    props: {
+      ...userFormatted
     }
-  };
+  }
 }

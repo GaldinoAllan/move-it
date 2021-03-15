@@ -49,6 +49,13 @@ export const createUserProfileDocument = async (
   return userRef
 }
 
+export const getUsers = async () => {
+  const usersRef = firestore.collection('users')
+  const usersSnapshot = await usersRef.get()
+
+  return usersSnapshot.docs.map(doc => doc.data());
+}
+
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
 }
