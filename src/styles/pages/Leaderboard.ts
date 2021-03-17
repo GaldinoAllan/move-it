@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 
 export const LeaderboardContainer = styled.div`
-  flex: 1;
-  height: 100vh;
+  max-width: 992px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 2.5rem 7rem;
+
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
 `

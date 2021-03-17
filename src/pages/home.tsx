@@ -21,10 +21,10 @@ import {
 interface IUserProps {
   uid: string;
   displayName: string;
-  email: string;
   photoURL: string;
   level: number;
   currentExperience: number;
+  totalExperience: number;
   challengesCompleted: number;
 }
 

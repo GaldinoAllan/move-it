@@ -18,6 +18,7 @@ interface CurrentUserData {
   createdAt: Date;
   level: number;
   currentExperience: number;
+  totalExperience: number;
   challengesCompleted: number;
 }
 
@@ -28,6 +29,7 @@ interface AuthContextData {
   updateUser: (
     level: number,
     currentExperience: number,
+    totalExperience: number,
     challengesCompleted: number
   ) => void;
 }
@@ -52,6 +54,7 @@ export function AuthProvider({ children }) {
             createdAt: snapshot.data().createdAt,
             level: snapshot.data().level,
             currentExperience: snapshot.data().currentExperience,
+            totalExperience: snapshot.data().totalExperience,
             challengesCompleted: snapshot.data().challengesCompleted,
           }
 
@@ -81,12 +84,14 @@ export function AuthProvider({ children }) {
   function updateUser(
     level: number,
     currentExperience: number,
+    totalExperience: number,
     challengesCompleted: number
   ) {
     const updateData = {
       ...currentUser,
       level,
       currentExperience,
+      totalExperience,
       challengesCompleted
     }
 

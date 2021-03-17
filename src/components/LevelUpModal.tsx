@@ -8,7 +8,7 @@ export function LevelUpModal() {
   const { level, closeLevelUpModal } = useChallengesProvider()
 
   return (
-    <Overlay>
+    <Overlay onClick={closeLevelUpModal}>
       <motion.div animate={{ scale: [0.8, 1.1, 1] }} transition={{ duration: 0.9 }} >
         <Container>
           <header>{level}</header>

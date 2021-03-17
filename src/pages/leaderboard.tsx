@@ -1,12 +1,13 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Router from 'next/router'
+import { LeaderboardTable } from '../components/LeaderboardTable'
 
 import { Sidebar } from '../components/Sidebar'
 
 import { LeaderboardContainer } from '../styles/pages/Leaderboard'
 
-export default function Leaderboard(props) {
+export default function Leaderboard({ userFormatted }) {
   return (
     <LeaderboardContainer>
       <Head>
@@ -16,6 +17,7 @@ export default function Leaderboard(props) {
       <h1>
         Leaderboard
       </h1>
+      <LeaderboardTable />
     </LeaderboardContainer>
   )
 }
@@ -33,13 +35,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
       props: {}
     }
-  } else {
-    const userFormatted = JSON.parse(user)
+  }
 
-    return {
-      props: {
-        ...userFormatted
-      }
+  const userFormatted = JSON.parse(user)
+
+  return {
+    props: {
+      ...userFormatted
     }
-  };
+  }
 }

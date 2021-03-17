@@ -6,7 +6,7 @@ export const Container = styled.nav`
   justify-content: space-between;
   align-items: center;
 
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
 
