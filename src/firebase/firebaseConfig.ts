@@ -39,6 +39,7 @@ export const createUserProfileDocument = async (
         createdAt,
         level: 1,
         currentExperience: 0,
+        totalExperience: 0,
         challengesCompleted: 0,
       })
     } catch (error) {
@@ -47,6 +48,13 @@ export const createUserProfileDocument = async (
   }
 
   return userRef
+}
+
+export const getUsers = async () => {
+  const usersRef = firestore.collection('users')
+  const usersSnapshot = await usersRef.get()
+
+  return usersSnapshot.docs.map(doc => doc.data());
 }
 
 if (!firebase.apps.length) {
