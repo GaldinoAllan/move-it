@@ -22,8 +22,11 @@ export function LeaderboardTable() {
 
   useEffect(() => {
     getUsers().then((users) => {
+      const sortedUsers = users.sort((a, b) => (
+        (a.totalExperience < b.totalExperience) ? 1 : -1
+      ))
 
-      setUsers(users as IUsers[])
+      setUsers(sortedUsers as IUsers[])
     })
     setLoading(false)
   }, [])
@@ -45,6 +48,7 @@ export function LeaderboardTable() {
               {
                 users.map((user, idx) => (
                   <LeaderboardItem
+                    key={idx}
                     user={user}
                     position={idx + 1}
                   />

@@ -101,14 +101,14 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
       to 0 so it can keep going up until reach the max amount for the next level
     */
     let finalExperience = currentExperience + amount
-
-    setTotalExperience(finalExperience)
+    let finalTotalExperience = totalExperience + amount
 
     if (finalExperience >= experienceToNextLevel) {
       finalExperience = finalExperience - experienceToNextLevel
       levelUp();
     }
 
+    setTotalExperience(finalTotalExperience)
     setCurrentExperience(finalExperience)
     setActiveChallenge(null)
     setChallengesCompleted(challengesCompleted + 1)
