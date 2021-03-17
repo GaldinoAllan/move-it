@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const LeaderboardTableContainer = styled.div`
-  margin-top: 40px;
+  margin: 40px auto;
   max-width: 992px;
   width: 100%;
   display: flex;
@@ -16,4 +16,8 @@ export const TableHeader = styled.div`
   grid-template-columns: 0.6fr 4fr 1fr 1fr ;
   gap: 1rem;
   align-content: center;
+
+  span {
+    align-self: center;
+  }
 `

@@ -31,9 +31,7 @@ export const LeaderboardItem = ({ user, position }: ILeaderboardItemProps) => {
           level={user.level}
         />
       </ProfileContainer>
-      <p>
-        <BlueText>{user.challengesCompleted}</BlueText> completed
-      </p>
+      <BlueText>{user.challengesCompleted}</BlueText>
       <p>
         <BlueText>{user.totalExperience}</BlueText> xp
       </p>

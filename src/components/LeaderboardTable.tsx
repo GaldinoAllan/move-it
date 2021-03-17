@@ -37,7 +37,7 @@ export function LeaderboardTable() {
       <TableHeader>
         <span>POSITION</span>
         <span>USER</span>
-        <span>CHALLENGES</span>
+        <span>COMPLETED CHALLENGES</span>
         <span>EXPERIENCE</span>
       </TableHeader>
       {

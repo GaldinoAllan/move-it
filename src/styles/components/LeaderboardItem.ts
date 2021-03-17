@@ -30,4 +30,5 @@ export const ProfileContainer = styled.div``
 
 export const BlueText = styled.span`
   color: ${({ theme }) => theme.colors.blue};
+  align-self: center;
 `
