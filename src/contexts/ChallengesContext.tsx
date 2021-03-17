@@ -29,10 +29,10 @@ interface ChallengesProviderProps {
   children: ReactNode;
   uid: string;
   displayName: string;
-  email: string;
   photoURL: string;
   level: number;
   currentExperience: number;
+  totalExperience: number;
   challengesCompleted: number;
 }
 
@@ -43,6 +43,7 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
 
   const [level, setLevel] = useState(rest.level ?? 1)
   const [currentExperience, setCurrentExperience] = useState(rest.currentExperience ?? 0)
+  const [totalExperience, setTotalExperience] = useState(rest.totalExperience ?? 0)
   const [challengesCompleted, setChallengesCompleted] = useState(rest.challengesCompleted ?? 0)
 
   const [activeChallenge, setActiveChallenge] = useState(null)
@@ -56,9 +57,9 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
 
   useEffect(() => {
     if (rest.uid && currentExperience !== rest.currentExperience) {
-      updateUser(level, currentExperience, challengesCompleted)
+      updateUser(level, currentExperience, totalExperience, challengesCompleted)
     }
-  }, [level, currentExperience, challengesCompleted])
+  }, [level, currentExperience, totalExperience, challengesCompleted])
 
   function levelUp() {
     setLevel(level + 1)
@@ -101,6 +102,8 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
     */
     let finalExperience = currentExperience + amount
 
+    setTotalExperience(finalExperience)
+
     if (finalExperience >= experienceToNextLevel) {
       finalExperience = finalExperience - experienceToNextLevel
       levelUp();
@@ -114,6 +117,7 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
   const value = {
     level,
     currentExperience,
+    totalExperience,
     experienceToNextLevel,
     challengesCompleted,
     levelUp,

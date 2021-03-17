@@ -8,13 +8,10 @@ import {
 } from '../styles/components/LeaderboardItem'
 
 interface IUsers {
-  uid: string;
   displayName: string;
-  email: string;
   photoURL: string;
-  createdAt: Date;
   level: number;
-  currentExperience: number;
+  totalExperience: number;
   challengesCompleted: number;
 }
 
@@ -38,7 +35,7 @@ export const LeaderboardItem = ({ user, position }: ILeaderboardItemProps) => {
         <BlueText>{user.challengesCompleted}</BlueText> completed
       </p>
       <p>
-        <BlueText>{user.currentExperience}</BlueText> xp
+        <BlueText>{user.totalExperience}</BlueText> xp
       </p>
     </LeaderboardItemContainer>
   )

@@ -39,6 +39,7 @@ export const createUserProfileDocument = async (
         createdAt,
         level: 1,
         currentExperience: 0,
+        totalExperience: 0,
         challengesCompleted: 0,
       })
     } catch (error) {

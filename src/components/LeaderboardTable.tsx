@@ -9,13 +9,10 @@ import {
 import { LeaderboardItem } from './LeaderboardItem'
 
 interface IUsers {
-  uid: string;
   displayName: string;
-  email: string;
   photoURL: string;
-  createdAt: Date;
   level: number;
-  currentExperience: number;
+  totalExperience: number;
   challengesCompleted: number;
 }
 
